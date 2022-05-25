@@ -1,0 +1,123 @@
+<?php
+
+// Function to check if a year is a Leap year
+function isLeapYear($year) {
+  if ($year % 4 !== 0) {
+    return false;
+  } else if ($year % 100 !== 0) {
+    return true;
+  } else if ($year % 400 !== 0) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+// Function to handle the offsets
+function handleOffsets($finalCalc, $year, $month) {
+  $finalCalcWithOffset = $finalCalc;
+  if (isLeapYear($year) && ($month === "January" || $month === "February")) {
+    $finalCalcWithOffset -= 1;
+  }
+  if ($year >= 2100 && $year < 2200) {
+    $finalCalcWithOffset += 4;
+  }
+  if ($year >= 2000 && $year < 2100) {
+    $finalCalcWithOffset += 6;
+  }
+  if ($year >= 1800 && $year < 1900) {
+    $finalCalcWithOffset += 2;
+  }
+  if (($year >= 1700) & ($year < 1800)) {
+    $finalCalcWithOffset += 4;
+  }
+
+  return $finalCalcWithOffset;
+}
+
+$monthCodes = [
+  "January" => 1,
+  "February" => 4,
+  "March" => 4,
+  "April" => 0,
+  "May" => 2,
+  "June" => 5,
+  "July" => 0,
+  "August" => 3,
+  "September" => 6,
+  "October" => 1,
+  "November" => 4,
+  "December" => 6,
+];
+
+$days = [
+  "Saturday",
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+];
+
+function getDayOfTheWeek($year, $month, $day) {
+  global $monthCodes;
+  global $days;
+  // Step1: get number of 12's for the last two digits
+  $lastTwoDigits = $year % 100;
+  $numOfTwelves = floor($lastTwoDigits / 12);
+
+  // Step 2: Look at the remainder of this division
+  $numOfTwelvesRemainder = $lastTwoDigits % 12;
+
+  // Step 3: Number of 4's fit into remainder
+  $numOfFours = floor($numOfTwelvesRemainder / 4);
+
+  // Step 4:
+  // TODO: Add the day parameter passed into this function
+
+  // Step5:
+  // Add the month code
+  // -> Create a mapping between months to codes [ Completed ]
+  $obtainedMonthCode = $monthCodes[$month];
+
+  // Step 6: 
+  // Add steps above, then mod by 7
+  $sumOfSteps = $numOfTwelves + $numOfTwelvesRemainder + $numOfFours + $day + $obtainedMonthCode;
+  $finalCalcWithOffset = handleOffsets($sumOfSteps, $year, $month);
+  $finalCalcWithOffsetMod7 = $finalCalcWithOffset % 7;
+  $dayOfTheWeek = $days[$finalCalcWithOffsetMod7];
+  return $dayOfTheWeek;
+}
+
+// echo getDayOfTheWeek(2022, "May", 24) . "\n";
+
+function makeCalendar() {
+  $YEAR = 2022;
+  $MONTH_DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  $MONTH_NUMBERS = [
+    0 => "January",
+    1 => "February",
+    2 => "March",
+    3 => "April",
+    4 => "May",
+    5 => "June",
+    6 => "July",
+    7 => "August",
+    8 => "September",
+    9 => "October",
+    10 => "November",
+    11 => "December",
+  ];
+
+  for ($i = 0; $i < 12; $i++) {
+    for ($j = 1; $j <= $MONTH_DAYS[$i]; $j++) {
+      $dayOfTheWeek = getDayOfTheWeek($YEAR, $MONTH_NUMBERS[$i], $j);
+      $MONTH_NUMERIC = $i + 1;
+      $DAY_NUMERIC = $j;
+      echo "$MONTH_NUMERIC-$DAY_NUMERIC-$YEAR is a $dayOfTheWeek \n";
+    }
+  }
+}
+
+makeCalendar();
