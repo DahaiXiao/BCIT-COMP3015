@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Comp 3015 LAB2</title>
+  </head>
+  <body>
+    <h2>COMP 3015 LAB 2 </h2>
+    <p>
+      HAINI XIAO A00587586  May 24,2022
+    </p>
+
+    <fieldset>
+    <form action="./lab2_processor.php" method="post">
+      <input type="text" name="username" id="username" />
+      <label for="username">Username</label><br />
+
+      <input type="password" name="password" id="password" />
+      <label for="password">Password</label><br />
+     
+      <input type="studentnumber" name="studentnumber" id="studentnumber" />
+      <label for="password">Student Number</label><br />
+      <hr>
+      Gender: 
+      <input type ="radio" name="gender" value = "female">Female
+      <input type ="radio" name="gender" value = "male">Male<br />
+      <hr>
+      <label for="language">Choose computer language you are studying</label><br />
+
+      <input type ="checkbox" name="languages[]" value = "c++">C++<br />
+      <input type ="checkbox" name="languages[]" value = "c#">C#<br />
+      <input type ="checkbox" name="languages[]" value = "javascript">Javascript<br />
+      <input type ="checkbox" name="languages[]" value = "java">Java<br />
+      <input type ="checkbox" name="languages[]" value = "perl">Perl<br />
+      <input type ="checkbox" name="languages[]" value = "php">Php<br />
+      <input type ="checkbox" name="languages[]" value = "python">Python<br />
+     
+      </select>
+    
+      </fieldset>
+
+      <input type="submit" value="Submit" />
+    </form>
+  </body>
+</html>
