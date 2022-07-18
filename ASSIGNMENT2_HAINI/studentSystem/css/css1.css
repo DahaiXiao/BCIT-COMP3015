@@ -1,0 +1,17 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+a:hover {
+    color: #cb547d;
+}
+span{
+    color: white;
+}
+a>span:hover{
+    color: #cb547d;;
+}
